@@ -1,8 +1,11 @@
-function updateAndCheckBoxes() {
-  // --- 고유 아이디 설정 ---
-  const SOURCE_SPREADSHEET_ID = "1bGotri5sqcxt1H07QlU4lxV98m_he6i2NfZRHqfNaxg"; // Key Player 마스터 리스트 ('Confirmed' 시트)
-  const TARGET_SPREADSHEET_ID = "19e7eDjoZRFZooghZJF3XmOZzZcgmqsp9mFAfjvJWhj4"; // WSOP CSV 데이터 + Key Player 마킹 ('type' 시트)
+// =============================================================================
+// 전역 설정: Spreadsheet ID
+// =============================================================================
+const SOURCE_SPREADSHEET_ID = "1bGotri5sqcxt1H07QlU4lxV98m_he6i2NfZRHqfNaxg"; // Key Player 마스터 리스트 ('Confirmed' 시트)
+const TARGET_SPREADSHEET_ID = "19e7eDjoZRFZooghZJF3XmOZzZcgmqsp9mFAfjvJWhj4"; // WSOP CSV 데이터 + Key Player 마킹 ('Type' 시트)
 
+
+function updateAndCheckBoxes() {
   Logger.log("🚀 스크립트 실행 시작");
 
   try {
