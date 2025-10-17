@@ -41,7 +41,8 @@ K열 Key Player 마킹 + L열 이름 축약 완료
 ### 2단계: Time Trigger 설정 (1회만!)
 
 1. **함수 선택**:
-   - 편집기 상단 드롭다운에서 **`setupTimeTrigger`** 선택
+   - 편집기 상단 드롭다운에서 **`setupTimeTriggerWithUI`** 선택
+   - (주의: `setupTimeTrigger`가 아닌 `setupTimeTriggerWithUI`입니다!)
 
 2. **실행 버튼 클릭**:
    - 재생 버튼(▶) 클릭
@@ -80,11 +81,11 @@ K열 Key Player 마킹 + L열 이름 축약 완료
 
 ### 방법 1: Trigger 상태 확인
 
-1. Apps Script 편집기에서 `checkTriggerStatus` 선택
+1. Apps Script 편집기에서 **`checkTriggerStatusWithUI`** 선택
 2. ▶ 실행
 3. 팝업 메시지 확인:
    - ✅ 자동 실행 활성화됨
-   - 마지막 처리 시간
+   - 트리거 수, 마지막 처리 시간
 
 ### 방법 2: 실행 로그 확인
 
@@ -105,14 +106,14 @@ K열 Key Player 마킹 + L열 이름 축약 완료
 ### Trigger 중단하기
 
 자동 실행을 중단하려면:
-1. `deleteTimeTrigger` 선택
+1. **`deleteTimeTriggerWithUI`** 선택
 2. ▶ 실행
 3. 확인: "✅ 자동 실행 중단 완료!"
 
 ### Trigger 재활성화
 
 다시 활성화하려면:
-1. `setupTimeTrigger` 선택
+1. **`setupTimeTriggerWithUI`** 선택
 2. ▶ 실행
 
 ---

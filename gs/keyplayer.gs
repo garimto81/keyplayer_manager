@@ -126,11 +126,7 @@ function setupTimeTrigger() {
   Logger.log("   → autoRunIfUpdated() 함수가 1분마다 자동 실행됩니다.");
   Logger.log("   → Type 시트 업데이트 감지 시 updateAndCheckBoxes() 자동 실행");
 
-  SpreadsheetApp.getUi().alert(
-    "✅ 자동 실행 설정 완료!\n\n" +
-    "앞으로 Python이 Type 시트에 CSV를 업로드하면\n" +
-    "1분 이내에 자동으로 Key Player 마킹이 실행됩니다."
-  );
+  return "✅ Time Trigger 설정 완료! autoRunIfUpdated()가 1분마다 실행됩니다.";
 }
 
 
@@ -221,11 +217,7 @@ function deleteTimeTrigger() {
 
   Logger.log(`✅ Time Trigger 삭제 완료 (${deletedCount}개)`);
 
-  SpreadsheetApp.getUi().alert(
-    `✅ 자동 실행 중단 완료!\n\n` +
-    `삭제된 트리거: ${deletedCount}개\n` +
-    `다시 활성화하려면 setupTimeTrigger() 실행`
-  );
+  return `✅ Time Trigger 삭제 완료 (${deletedCount}개)`;
 }
 
 
@@ -263,13 +255,61 @@ function checkTriggerStatus() {
   Logger.log(`  시간: ${lastProcessedTime || '없음'}`);
   Logger.log("=".repeat(60));
 
-  // UI 알림
-  let message = autoTriggers.length > 0
-    ? `✅ 자동 실행 활성화됨\n\n트리거 수: ${autoTriggers.length}개\n실행 주기: 1분마다`
-    : "⚠️ 자동 실행 비활성화됨\n\nsetupTimeTrigger() 실행 필요";
+  return {
+    active: autoTriggers.length > 0,
+    triggerCount: autoTriggers.length,
+    lastProcessedRow: lastProcessedRow,
+    lastProcessedTime: lastProcessedTime
+  };
+}
 
-  if (lastProcessedTime) {
-    message += `\n\n마지막 처리: ${lastProcessedTime}`;
+
+// ============================================================
+// UI 헬퍼 함수 (Apps Script 에디터에서 수동 실행용)
+// ============================================================
+
+/**
+ * UI와 함께 Time Trigger 설정 (Apps Script 에디터에서 수동 실행)
+ * setupTimeTrigger()를 호출하고 결과를 UI로 표시
+ */
+function setupTimeTriggerWithUI() {
+  const result = setupTimeTrigger();
+
+  SpreadsheetApp.getUi().alert(
+    "✅ 자동 실행 설정 완료!\n\n" +
+    "앞으로 Python이 Type 시트에 CSV를 업로드하면\n" +
+    "1분 이내에 자동으로 Key Player 마킹이 실행됩니다.\n\n" +
+    "확인: Apps Script > 트리거 메뉴"
+  );
+}
+
+
+/**
+ * UI와 함께 Time Trigger 삭제 (Apps Script 에디터에서 수동 실행)
+ */
+function deleteTimeTriggerWithUI() {
+  const result = deleteTimeTrigger();
+
+  SpreadsheetApp.getUi().alert(
+    "✅ 자동 실행 중단 완료!\n\n" +
+    result + "\n\n" +
+    "다시 활성화하려면 setupTimeTriggerWithUI() 실행"
+  );
+}
+
+
+/**
+ * UI와 함께 Trigger 상태 확인 (Apps Script 에디터에서 수동 실행)
+ */
+function checkTriggerStatusWithUI() {
+  const status = checkTriggerStatus();
+
+  let message = status.active
+    ? `✅ 자동 실행 활성화됨\n\n트리거 수: ${status.triggerCount}개\n실행 주기: 1분마다`
+    : "⚠️ 자동 실행 비활성화됨\n\nsetupTimeTriggerWithUI() 실행 필요";
+
+  if (status.lastProcessedTime) {
+    message += `\n\n마지막 처리:\n${status.lastProcessedTime}\n행 수: ${status.lastProcessedRow}`;
   }
 
   SpreadsheetApp.getUi().alert(message);

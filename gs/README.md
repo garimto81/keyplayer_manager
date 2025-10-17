@@ -16,10 +16,13 @@
 | 함수 | 용도 | 실행 방법 |
 |------|------|----------|
 | **updateAndCheckBoxes** | Key Player 업데이트 (메인 로직) | 수동 실행 또는 Trigger 호출 |
-| **setupTimeTrigger** | Time Trigger 설정 (1분 주기) | 1회 수동 실행 |
+| **setupTimeTrigger** | Time Trigger 설정 (코드용) | Python/API에서 호출 |
+| **setupTimeTriggerWithUI** | Time Trigger 설정 (UI 포함) | Apps Script 에디터에서 수동 실행 |
 | **autoRunIfUpdated** | 자동 실행 (변경 감지) | Trigger가 자동 호출 |
-| **checkTriggerStatus** | Trigger 상태 확인 | 수동 실행 |
-| **deleteTimeTrigger** | Trigger 중단 | 수동 실행 |
+| **checkTriggerStatus** | Trigger 상태 반환 (코드용) | Python/API에서 호출 |
+| **checkTriggerStatusWithUI** | Trigger 상태 확인 (UI 포함) | Apps Script 에디터에서 수동 실행 |
+| **deleteTimeTrigger** | Trigger 중단 (코드용) | Python/API에서 호출 |
+| **deleteTimeTriggerWithUI** | Trigger 중단 (UI 포함) | Apps Script 에디터에서 수동 실행 |
 
 ---
 
@@ -45,9 +48,11 @@
 
 ### 2단계: Time Trigger 설정 (자동 실행)
 
-1. 함수 선택: **`setupTimeTrigger`**
+1. 함수 선택: **`setupTimeTriggerWithUI`**
 2. ▶ 실행 버튼 클릭
-3. 권한 승인 (처음만)
+3. 권한 승인 (처음만):
+   - "권한 검토" → Google 계정 선택
+   - "고급" → "프로젝트 이름(으)로 이동" → "허용"
 4. 완료 확인: "✅ 자동 실행 설정 완료!" 팝업
 
 ---
@@ -117,12 +122,17 @@ const TARGET_SPREADSHEET_ID = "19e7eDjoZRFZooghZJF3XmOZzZcgmqsp9mFAfjvJWhj4";
 - TARGET: `Type` (대문자 T)
 
 ### Trigger 작동 안 함
-**확인**: `checkTriggerStatus` 실행
-**해결**: `deleteTimeTrigger` → `setupTimeTrigger` 재실행
+**확인**: `checkTriggerStatusWithUI` 실행
+**해결**: `deleteTimeTriggerWithUI` → `setupTimeTriggerWithUI` 재실행
 
 ---
 
 ## 📝 버전 히스토리
+
+- **v1.1.0** (2025-10-17):
+  - **UI 함수 분리**: `setupTimeTriggerWithUI`, `checkTriggerStatusWithUI`, `deleteTimeTriggerWithUI` 추가
+  - `SpreadsheetApp.getUi()` 오류 수정 (트리거 컨텍스트에서 사용 불가 문제 해결)
+  - 코드용 함수와 UI용 함수 분리로 Python/API 호출 지원
 
 - **v1.0.0** (2025-10-17):
   - Time Trigger 자동 실행 추가
