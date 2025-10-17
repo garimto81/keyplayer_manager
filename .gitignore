@@ -1,0 +1,47 @@
+# 환경 변수 및 비밀정보
+.env
+credentials.json
+*.key
+*.pem
+session_cookies.pkl
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# 다운로드 파일
+downloads/
+*.csv
+!example.csv
+
+# 로그
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Chrome Driver
+chromedriver.exe
+chromedriver
+
+# 임시 파일
+*.tmp
+*.bak
+~$*
+nul
